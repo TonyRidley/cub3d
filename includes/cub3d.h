@@ -36,13 +36,26 @@ typedef struct s_app
 	void	*mlx_ptr;
 	void	*win_ptr;
 	t_image	img;
+
+	char	**map;
+	char	*path_no;
+	char	*path_so;
+	char	*path_we;
+	char	*path_ea;
+	int		floor_color[3];
+	int		ceiling_color[3];
 }	t_app;
+
+int		run_app(t_app app);
 
 // Window
 void	ft_mlx_pixel_put(t_image *image, int x, int y, int color);
-void	init_app(t_app *app);
+int		init_app(t_app *app, char *path_to_map);
 void	cleanup(t_app *app);
 void	mlx_hook_handler(t_app app);
 
+// Graphics
+void	display_map(t_app app);
+int		rgb_to_hex(int *rgb_color);
 
 #endif

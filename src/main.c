@@ -17,16 +17,20 @@
 int main(int argc, char *argv[])
 {
 	t_app	app;
-	char	**map;
 
 	if (argc != 2)
 		return (ft_putstr_fd("Invalid number of arguments. Please use ./cub3d path/to/map\n", 2), 1);
-	init_app(&app);
-	map = parse_map(argv[2]);
-	if (!app.mlx_ptr || !app.win_ptr || !map)
+	if (!init_app(&app, argv[2]))
 		return (1);
+	run_app(app);
 	mlx_hook_handler(app);
 	mlx_loop(app.mlx_ptr);
 	cleanup(&app);
+	return (0);
+}
+
+int run_app(t_app app)
+{
+	display_map(app);
 	return (0);
 }
