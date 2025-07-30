@@ -1,29 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   cleanup.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tridley <tridley@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 13:53:13 by tridley           #+#    #+#             */
-/*   Updated: 2025/07/30 15:20:41 by tridley          ###   ########.fr       */
+/*   Created: 2025/07/30 15:13:52 by tridley           #+#    #+#             */
+/*   Updated: 2025/07/30 15:13:54 by tridley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft.h"
-#include "mlx.h"
 
-int main(void)
+void	cleanup(t_app *app)
 {
-	t_app	app;
-
-	init_app(&app);
-
-	if (!app.mlx_ptr || !app.win_ptr)
-		return (1);
-	mlx_hook_handler(app);
-	mlx_loop(app.mlx_ptr);
-	cleanup(&app);
-	return (0);
+	if (app && app->img.img_ptr)
+	{
+		mlx_destroy_image(app->mlx_ptr, app->img.img_ptr);
+		app->img.img_ptr = NULL;
+	}
+	if (app && app->win_ptr)
+	{
+		mlx_destroy_window(app->mlx_ptr, app->win_ptr);
+		app->win_ptr = NULL;
+	}
+	if (app && app->mlx_ptr)
+	{
+		mlx_destroy_display(app->mlx_ptr);
+		free(app->mlx_ptr);
+		app->mlx_ptr = NULL;
+	}
 }

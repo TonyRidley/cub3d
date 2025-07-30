@@ -1,29 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   image.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tridley <tridley@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 13:53:13 by tridley           #+#    #+#             */
-/*   Updated: 2025/07/30 15:20:41 by tridley          ###   ########.fr       */
+/*   Created: 2025/07/30 15:01:41 by tridley           #+#    #+#             */
+/*   Updated: 2025/07/30 15:01:46 by tridley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include "libft.h"
-#include "mlx.h"
 
-int main(void)
+void	ft_mlx_pixel_put(t_image *image, int x, int y, int color)
 {
-	t_app	app;
+	char	*dst;
 
-	init_app(&app);
-
-	if (!app.mlx_ptr || !app.win_ptr)
-		return (1);
-	mlx_hook_handler(app);
-	mlx_loop(app.mlx_ptr);
-	cleanup(&app);
-	return (0);
+	dst = image->addr + (y * image->line_length + x * (image->bpp / 8));
+	*(unsigned int *)dst = color;
 }

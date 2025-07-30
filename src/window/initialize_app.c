@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   initialize_app.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tridley <tridley@student.codam.nl>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/30 13:53:13 by tridley           #+#    #+#             */
-/*   Updated: 2025/07/30 15:20:41 by tridley          ###   ########.fr       */
+/*   Created: 2025/07/30 15:05:28 by tridley           #+#    #+#             */
+/*   Updated: 2025/07/30 15:05:33 by tridley          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
-#include "libft.h"
 #include "mlx.h"
+#include "cub3d.h"
 
-int main(void)
+void	init_app(t_app *app)
 {
-	t_app	app;
-
-	init_app(&app);
-
-	if (!app.mlx_ptr || !app.win_ptr)
-		return (1);
-	mlx_hook_handler(app);
-	mlx_loop(app.mlx_ptr);
-	cleanup(&app);
-	return (0);
+	app->mlx_ptr = mlx_init();
+	app->win_ptr = mlx_new_window(app->mlx_ptr, WIN_WIDTH, WIN_HEIGHT,
+			"Starwars: Episode II - Attack of the Clones");
+	app->img.img_ptr = mlx_new_image(app->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
+	app->img.addr = mlx_get_data_addr(app->img.img_ptr, &app->img.bpp,
+			&app->img.line_length, &app->img.endian);
 }

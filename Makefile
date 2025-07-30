@@ -6,7 +6,7 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -O3
 
 # Headers
-HEADERS = -Iincludes -Idependencies/libft/includes -Idependencies/mlx-linux/
+HEADERS = -Iincludes -Idependencies/libft/includes -Idependencies/mlx-linux
 
 # Libraries
 LIBS = -lXext -lX11 -lm
