@@ -16,6 +16,7 @@
 #include "mlx.h"
 #include "libft.h"
 #include <stdlib.h>
+#include <stdio.h>
 #include <X11/keysym.h>
 
 # define WIN_WIDTH 1200
