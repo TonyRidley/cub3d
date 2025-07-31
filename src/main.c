@@ -19,18 +19,14 @@ int main(int argc, char *argv[])
 	t_app	app;
 
 	if (argc != 2)
-		return (ft_putstr_fd("Invalid number of arguments. Please use ./cub3d path/to/map\n", 2), 1);
-	if (!init_app(&app, argv[2]))
+		return (ft_putstr_fd("Invalid number of arguments. Please use ./cub3d path/to/the/map\n", 2), 1);
+	ft_memset(&app, 0, sizeof(t_app));
+	if (init_app(&app, argv[2]))
 		return (1);
-	run_app(app);
-	mlx_hook_handler(app);
+	display(&app);
+	mlx_window_hook_handler(app);
 	mlx_loop(app.mlx_ptr);
 	cleanup(&app);
 	return (0);
 }
 
-int run_app(t_app app)
-{
-	display_map(app);
-	return (0);
-}

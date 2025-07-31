@@ -59,8 +59,8 @@ int	get_map_data(int fd, t_app *app, char *first_line)
 	if (first_line && is_map_line(first_line))
 	{
 		temp_lines[count] = ft_strdup(first_line);
-		if (ft_strlen(first_line) > max_width)
-			max_width = ft_strlen(first_line);
+		if ((int)ft_strlen(first_line) > max_width)
+			max_width = (int)ft_strlen(first_line);
 		count++;
 	}
 	
@@ -70,8 +70,8 @@ int	get_map_data(int fd, t_app *app, char *first_line)
 		if (is_map_line(line))
 		{
 			temp_lines[count] = ft_strdup(line);
-			if (ft_strlen(line) > max_width)
-				max_width = ft_strlen(line);
+			if ((int)ft_strlen(line) > max_width)
+				max_width = (int)ft_strlen(line);
 			count++;
 		}
 		else if (line[0] != '\n' && line[0] != '\0')  // Non-empty, non-map = error
@@ -125,7 +125,7 @@ int	get_map_data(int fd, t_app *app, char *first_line)
 		
 		// Kopieer regel (zonder newline)
 		ft_memset(app->map[i], ' ', app->map_width);  // Vul met spaties
-		ft_strncpy(app->map[i], temp_lines[i], 
+		ft_strlcpy(app->map[i], temp_lines[i], 
 			ft_strlen(temp_lines[i]) - 1);  // -1 voor newline
 		app->map[i][app->map_width] = '\0';
 		

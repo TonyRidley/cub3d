@@ -7,5 +7,4 @@ Map Parsing
 
 
 Graphics
-- Display Map
-- Introduce moving
+- Optimizen, bij elke move displayed hij alles opnieuw

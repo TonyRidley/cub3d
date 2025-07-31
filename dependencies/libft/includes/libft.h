@@ -18,6 +18,7 @@
 # include <limits.h>
 # include "ft_printf.h"
 # include "lib2.h"
+# include "get_next_line.h"
 
 typedef struct s_list
 {

@@ -13,14 +13,16 @@ OBJ_DIR = obj
 LIB2_DIR = $(SRC_DIR)/corelib2/
 LIBFT_DIR = $(SRC_DIR)/corelib/
 PRINTF_DIR = $(SRC_DIR)/printf/
+GNL_DIR = $(SRC_DIR)/gnl/
 
 # Automatically Detect All Source Files in Directories
 LIBFT_SRCS = $(wildcard $(LIBFT_DIR)*.c)
 LIB2_SRCS = $(wildcard $(LIB2_DIR)*.c)
 FT_PRINTF_SRCS = $(wildcard $(PRINTF_DIR)*.c) $(wildcard $(PRINTF_DIR)specifiers/*.c)
+GNL_SRCS = $(wildcard $(GNL_DIR)*.c)
 
 # Combine All Source Files
-SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(LIB2_SRCS)
+SRCS = $(LIBFT_SRCS) $(FT_PRINTF_SRCS) $(LIB2_SRCS) $(GNL_SRCS)
 
 # Object Files
 OBJS = $(SRCS:%.c=$(OBJ_DIR)/%.o)

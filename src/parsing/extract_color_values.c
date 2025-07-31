@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <ctype.h>
+
 #include "cub3d.h"
 
 static int	validate_rgb_content(char **rgb_strings)
@@ -28,7 +30,7 @@ static int	validate_rgb_content(char **rgb_strings)
 		j = 0;
 		while (rgb_strings[i][j])
 		{
-			if (!ft_isdigit(rgb_strings[i][j]) && !ft_isspace(rgb_strings[i][j]))
+			if (!ft_isdigit(rgb_strings[i][j]) && !isspace(rgb_strings[i][j]))
 			{
 				ft_printf("Error\nRGB must contain digits only\n");
 				return (0);
