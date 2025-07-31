@@ -22,8 +22,8 @@ int	init_app(t_app *app, char *path_to_map)
 	app->img.img_ptr = mlx_new_image(app->mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	app->img.addr = mlx_get_data_addr(app->img.img_ptr, &app->img.bpp,
 			&app->img.line_length, &app->img.endian);
+	printf("path: %s\n", path_to_map);
 	parsing(app, path_to_map);
-	//init_test_map(app);
 	init_camera(app);
 	if (!load_textures(app))
 	{

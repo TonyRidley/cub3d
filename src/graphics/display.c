@@ -17,11 +17,11 @@ static void	fill_ceiling(t_app *app, int ceiling_color);
 
 void	display(t_app *app)
 {
-	// int floor_color = rgb_to_hex(app->ceiling_color);
-	//int ceiling_color = rgb_to_hex(app.ceiling_color);
-	int floor_color = 0x00FF66;
-	int ceiling_color = 0x03e8fc;
-	
+	int	floor_color;
+	int	ceiling_color;
+
+	floor_color = rgb_to_hex(app->floor_color);
+	ceiling_color = rgb_to_hex(app->ceiling_color);
 	fill_ceiling(app, ceiling_color);
 	fill_floor(app, floor_color);
 	cast_rays(app);

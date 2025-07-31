@@ -30,6 +30,5 @@ char	*ft_strchr(const char *s, int c);
 char	*read_first_line(int fd, char *text);
 char	*ft_get_line(char *text);
 char	*clean_first_line(char *text);
-void	*ft_calloc(size_t count, size_t size);
 
 #endif

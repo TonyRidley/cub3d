@@ -31,26 +31,6 @@ char	*ft_strjoingnl(char *s1, char *s2)
 	return (start);
 }
 
-void	*ft_calloc(size_t count, size_t size)
-{
-	void	*ptr;
-	char	*p;
-	size_t	total_size;
-	size_t	i;
-
-	total_size = count * size;
-	if (count != 0 && size != 0 && total_size / count != size)
-		return (NULL);
-	ptr = malloc(total_size);
-	if (!ptr)
-		return (NULL);
-	p = (char *)ptr;
-	i = 0;
-	while (i < total_size)
-		p[i++] = 0;
-	return (ptr);
-}
-
 void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
 	size_t		i;

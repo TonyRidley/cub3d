@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
 	if (argc != 2)
 		return (ft_putstr_fd("Invalid number of arguments. Please use ./cub3d path/to/the/map\n", 2), 1);
 	ft_memset(&app, 0, sizeof(t_app));
-	if (init_app(&app, argv[2]))
+	if (init_app(&app, argv[1]))
 		return (1);
 	display(&app);
 	mlx_window_hook_handler(app);

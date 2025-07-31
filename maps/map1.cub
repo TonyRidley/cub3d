@@ -3,8 +3,8 @@ SO ./assets/wolfenstein/eagle.xpm
 WE ./assets/wolfenstein/purplestone.xpm
 EA ./assets/wolfenstein/wood.xpm
 
-F 220,100,0
-C 225,30,0
+F 30,100,40
+C 55,100,250
 
 111111
 100101
