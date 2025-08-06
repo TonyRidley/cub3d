@@ -6,7 +6,7 @@
 /*   By: jspannin <jspannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 10:26:01 by jspannin          #+#    #+#             */
-/*   Updated: 2025/07/31 15:37:11 by jspannin         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:29:48 by jspannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ static char	*get_configurations(int fd, t_app *app)
 {
 	char	*line;
 
-	while ((line = get_next_line(fd)) != NULL)
+	line = get_next_line(fd);
+	while (line != NULL)
 	{
 		if (is_config_line(line))
 		{
@@ -28,8 +29,44 @@ static char	*get_configurations(int fd, t_app *app)
 			return (line);
 		else
 			free(line);
+		line = get_next_line(fd);
 	}
 	return (NULL);
+}
+
+static int	configurations_part(int fd, t_app *app, char **first_line)
+{
+	*first_line = get_configurations(fd, app);
+	if (!*first_line)
+	{
+		close(fd);
+		printf("Error\nconfiguration parsing failed or no map found");
+		return (0);
+	}
+	if (!validate_config(app))
+	{
+		free(*first_line);
+		close(fd);
+		return (0);
+	}
+	return (1);
+}
+
+static int	map_part(int fd, t_app *app, char *first_line)
+{
+	if (!get_map_data(fd, app, first_line))
+	{
+		free(first_line);
+		close(fd);
+		return (0);
+	}
+	if (!validate_map(app))
+	{
+		free(first_line);
+		close(fd);
+		return (0);
+	}
+	return (1);
 }
 
 int	parsing(t_app *app, char *map_file)
@@ -40,29 +77,11 @@ int	parsing(t_app *app, char *map_file)
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
 		return (0);
-
-	first_line = get_configurations(fd, app);
-	if (!first_line)
-	{
-		close(fd);
-		printf("Error: configuration parsing failed or no map found");
+	if (!configurations_part(fd, app, &first_line))
 		return (0);
-	}
-
-	if (!validate_config(app))
-	{
-		free(first_line);
-		close(fd);
+	if (!map_part(fd, app, first_line))
 		return (0);
-	}
-
-	if (!get_map_data(fd, app, first_line))
-	{
-		free(first_line);
-		close(fd);
-		return (0);
-	}
 	free(first_line);
-	close (fd);
-	return (1); // success
+	close(fd);
+	return (1);
 }

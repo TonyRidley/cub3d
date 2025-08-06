@@ -6,8 +6,13 @@
 /*   By: jspannin <jspannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 10:26:12 by jspannin          #+#    #+#             */
-/*   Updated: 2025/07/31 10:27:13 by jspannin         ###   ########.fr       */
+/*   Updated: 2025/08/06 15:30:15 by jspannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+int	validate_map(t_app *app)
+{
+	//to do
+}
