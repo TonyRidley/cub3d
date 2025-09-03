@@ -6,7 +6,7 @@
 /*   By: jspannin <jspannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 10:26:01 by jspannin          #+#    #+#             */
-/*   Updated: 2025/08/06 15:29:48 by jspannin         ###   ########.fr       */
+/*   Updated: 2025/08/07 20:05:05 by jspannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ static int	configurations_part(int fd, t_app *app, char **first_line)
 	return (1);
 }
 
-static int	map_part(int fd, t_app *app, char *first_line)
+static int	map_part(int fd, t_app *app, char *first_line, char *map_file)
 {
-	if (!get_map_data(fd, app, first_line))
+	if (!parse_map(fd, app, first_line, map_file))
 	{
 		free(first_line);
 		close(fd);
@@ -79,7 +79,7 @@ int	parsing(t_app *app, char *map_file)
 		return (0);
 	if (!configurations_part(fd, app, &first_line))
 		return (0);
-	if (!map_part(fd, app, first_line))
+	if (!map_part(fd, app, first_line, map_file))
 		return (0);
 	free(first_line);
 	close(fd);

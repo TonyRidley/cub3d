@@ -6,7 +6,7 @@
 /*   By: jspannin <jspannin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/31 10:26:06 by jspannin          #+#    #+#             */
-/*   Updated: 2025/07/31 14:33:34 by jspannin         ###   ########.fr       */
+/*   Updated: 2025/08/07 19:57:01 by jspannin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	empty_string(char *str)
 {
 	while (*str)
 	{
-		if (*str == ' ' || *str == '\t')
+		if (*str == ' ' || *str == '\t' || *str == '\n')
 			str++;
 		else
 			return (0);
