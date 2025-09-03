@@ -23,7 +23,8 @@ int	init_app(t_app *app, char *path_to_map)
 	app->img.addr = mlx_get_data_addr(app->img.img_ptr, &app->img.bpp,
 			&app->img.line_length, &app->img.endian);
 	printf("path: %s\n", path_to_map);
-	parsing(app, path_to_map);
+	if (!parsing(app, path_to_map))
+		return (1);
 	init_camera(app);
 	if (!load_textures(app))
 	{
@@ -33,19 +34,21 @@ int	init_app(t_app *app, char *path_to_map)
 	return (0);
 }
 
-int find_starting_dir(char *map[], int width, int height, int *x_pos, int *y_pos)
+int	find_starting_dir(t_app *app, int *x_pos, int *y_pos)
 {
-	int	x = 0;
-	int y = 0;
-	int square;
+	int	x;
+	int	y;
+	int	square;
 
-	while (x < width)
+	x = 0;
+	while (x < app->map_width)
 	{
 		y = 0;
-		while (y < height)
+		while (y < app->map_height)
 		{
-			square = map[x][y];
-			if (square == 'N' || square == 'S' || square == 'E' || square == 'W')
+			square = app->map[x][y];
+			if (square == 'N' || square == 'S' || square == 'E'
+				|| square == 'W')
 			{
 				*x_pos = x;
 				*y_pos = y;

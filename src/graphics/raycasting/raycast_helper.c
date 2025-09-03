@@ -17,10 +17,10 @@ double	deg_to_rad(double degrees)
 	return (degrees * PI / 180.0);
 }
 
-double	getTicks(void)
+double	get_ticks(void)
 {
 	struct timeval	tv;
-	
+
 	gettimeofday(&tv, NULL);
 	return (tv.tv_sec * 1000.0 + tv.tv_usec / 1000.0);
 }
@@ -37,5 +37,26 @@ int	get_texture_pixel(t_image *texture, int x, int y)
 	char	*dst;
 
 	dst = texture->addr + (y * texture->line_length + x * (texture->bpp / 8));
-	return (*(unsigned int*)dst);
+	return (*(unsigned int *)dst);
+}
+
+void	render_wall_stripe(t_app *app, t_raycast_data *data, int x)
+{
+	double	step;
+	double	tex_pos;
+	int		y;
+	int		tex_y;
+	int		color;
+
+	step = 1.0 * app->tex_height / data->lineHeight;
+	tex_pos = (data->drawStart - WIN_HEIGHT / 2 + data->lineHeight / 2) * step;
+	y = data->drawStart;
+	while (y < data->drawEnd)
+	{
+		tex_y = (int)tex_pos & (app->tex_height - 1);
+		tex_pos += step;
+		color = get_texture_pixel(data->current_texture, data->texX, tex_y);
+		ft_mlx_pixel_put(&app->img, x, y, color);
+		y++;
+	}
 }

@@ -30,14 +30,13 @@ static int	handle_keypress(int keycode, void *param)
 		mlx_loop_end(app->mlx_ptr);
 		return (0);
 	}
-	if (keycode == 'w' || keycode == 'W' || keycode == 's' || keycode == 'S' ||
-		keycode == XK_Left || keycode == XK_Right || keycode == 'a' || keycode == 'A' ||
-		keycode == 'd' || keycode == 'D')
+	if (keycode == 'w' || keycode == 'W' || keycode == 's' || keycode == 'S'
+		|| keycode == XK_Left || keycode == XK_Right || keycode == 'a'
+		|| keycode == 'A' || keycode == 'd' || keycode == 'D')
 	{
 		handle_movement(app, keycode);
 		display(app);
 	}
-	
 	return (0);
 }
 

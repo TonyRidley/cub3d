@@ -25,15 +25,16 @@ void	display(t_app *app)
 	fill_ceiling(app, ceiling_color);
 	fill_floor(app, floor_color);
 	cast_rays(app);
-
 	mlx_put_image_to_window(app->mlx_ptr, app->win_ptr, app->img.img_ptr, 0, 0);
 }
 
-static void fill_floor(t_app *app, int floor_color)
+static void	fill_floor(t_app *app, int floor_color)
 {
-	int x = 0;
-	int y = WIN_HEIGHT / 2;
-	
+	int	x;
+	int	y;
+
+	x = 0;
+	y = WIN_HEIGHT / 2;
 	while (x < WIN_WIDTH)
 	{
 		y = WIN_HEIGHT / 2;
@@ -46,11 +47,13 @@ static void fill_floor(t_app *app, int floor_color)
 	}
 }
 
-static void fill_ceiling(t_app *app, int ceiling_color)
+static void	fill_ceiling(t_app *app, int ceiling_color)
 {
-	int x = 0;
-	int y = 0;
-	
+	int	x;
+	int	y;
+
+	x = 0;
+	y = 0;
 	while (x < WIN_WIDTH)
 	{
 		y = 0;

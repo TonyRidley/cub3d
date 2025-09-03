@@ -12,18 +12,17 @@
 
 #include "cub3d.h"
 
-int	find_starting_dir(char *map[], int width, int height, int *x_pos, int *y_pos);
 static void	setup_camera_north(t_app *app);
-static void setup_camera_south(t_app *app);
-static void setup_camera_east(t_app *app);
-static void setup_camera_west(t_app *app);
+static void	setup_camera_south(t_app *app);
+static void	setup_camera_east(t_app *app);
+static void	setup_camera_west(t_app *app);
 
-void init_camera(t_app *app)
+void	init_camera(t_app *app)
 {
 	int		x_pos;
 	int		y_pos;
 
-	if (find_starting_dir(app->map, app->map_width, app->map_height, &x_pos, &y_pos))
+	if (find_starting_dir(app, &x_pos, &y_pos))
 	{
 		app->player.x = y_pos + 0.5;
 		app->player.y = x_pos + 0.5;
@@ -43,7 +42,7 @@ void init_camera(t_app *app)
 		ft_printf("No starting position found\n");
 }
 
-static void setup_camera_north(t_app *app)
+static void	setup_camera_north(t_app *app)
 {
 	app->ray.dirX = 0;
 	app->ray.dirY = -1;
@@ -52,7 +51,7 @@ static void setup_camera_north(t_app *app)
 	app->player.angle = deg_to_rad(270);
 }
 
-static void setup_camera_south(t_app *app)
+static void	setup_camera_south(t_app *app)
 {
 	app->ray.dirX = 0;
 	app->ray.dirY = 1;
@@ -61,7 +60,7 @@ static void setup_camera_south(t_app *app)
 	app->player.angle = deg_to_rad(90);
 }
 
-static void setup_camera_east(t_app *app)
+static void	setup_camera_east(t_app *app)
 {
 	app->ray.dirX = 1;
 	app->ray.dirY = 0;
@@ -70,7 +69,7 @@ static void setup_camera_east(t_app *app)
 	app->player.angle = deg_to_rad(0);
 }
 
-static void setup_camera_west(t_app *app)
+static void	setup_camera_west(t_app *app)
 {
 	app->ray.dirX = -1;
 	app->ray.dirY = 0;

@@ -22,7 +22,8 @@ LIBFT = $(LIBFT_PATH)/libft.a
 
 # Source and Object files
 SRC_PATH = src/
-SRC = $(shell find ./src -iname "*.c")
+# Use a more CLion-friendly approach to find sources
+SRC = $(shell find $(SRC_PATH) -name "*.c")
 
 OBJ_PATH = obj/
 OBJ = $(SRC:$(SRC_PATH)%.c=$(OBJ_PATH)%.o)
@@ -32,25 +33,25 @@ all: $(MLX) $(LIBFT) $(NAME)
 
 $(OBJ_PATH)%.o: $(SRC_PATH)%.c
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(HEADERS) -c $< -o $@
 
 $(MLX):
-	make -sC $(MLX_PATH)
+	@make -sC $(MLX_PATH)
 
 $(LIBFT):
-	make -sC $(LIBFT_PATH)
+	@make -sC $(LIBFT_PATH)
 
 $(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX) $(LIBFT) $(LIBS) $(HEADERS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(MLX) $(LIBFT) $(LIBS)
 
 clean:
 	rm -rf $(OBJ_PATH)
-	cd $(MLX_PATH) && make clean
-	cd $(LIBFT_PATH) && make clean
+	@make -sC $(MLX_PATH) clean
+	@make -sC $(LIBFT_PATH) clean
 
 fclean: clean
 	rm -f $(NAME)
-	cd $(LIBFT_PATH) && make fclean
+	@make -sC $(LIBFT_PATH) fclean
 
 re: fclean all
 

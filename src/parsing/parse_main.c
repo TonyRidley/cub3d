@@ -28,7 +28,7 @@ static char	*get_configurations(int fd, t_app *app)
 		else if (is_map_line(line))
 			return (line);
 		else
-			free(line);
+			return(free(line), NULL);
 		line = get_next_line(fd);
 	}
 	return (NULL);

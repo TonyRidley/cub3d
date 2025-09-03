@@ -12,7 +12,7 @@
 
 #include "cub3d.h"
 
-void rotate_player_right(t_app *app)
+void	rotate_player_right(t_app *app)
 {
 	app->player.angle += PI / 8.0;
 	if (app->player.angle >= 2 * PI)
@@ -23,7 +23,7 @@ void rotate_player_right(t_app *app)
 	app->ray.planeY = cos(app->player.angle) * 0.66;
 }
 
-void rotate_player_left(t_app *app)
+void	rotate_player_left(t_app *app)
 {
 	app->player.angle -= PI / 8.0;
 	if (app->player.angle < 0)

@@ -14,11 +14,11 @@
 
 int	rgb_to_hex(int *rgb_color)
 {
-	int hex;
+	int	hex;
 	int	red;
 	int	green;
 	int	blue;
-	
+
 	red = rgb_color[0];
 	green = rgb_color[1];
 	blue = rgb_color[2];

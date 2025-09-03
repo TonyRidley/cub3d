@@ -13,7 +13,7 @@
 #include "cub3d.h"
 
 static void	move_forward(t_app *app);
-static void move_backward(t_app *app);
+static void	move_backward(t_app *app);
 static void	strafe_right(t_app *app);
 static void	strafe_left(t_app *app);
 
@@ -33,67 +33,66 @@ void	handle_movement(t_app *app, int keycode)
 		rotate_player_left(app);
 }
 
-static void move_forward(t_app *app)
+static void	move_forward(t_app *app)
 {
-	double	newX;
-	double	newY;
+	double	new_x;
+	double	new_y;
 
-	newX = app->ray.posX + app->ray.dirX;
-	newY = app->ray.posY + app->ray.dirY;
-	if (!is_wall(app, (int)newX, (int)newY))
+	new_x = app->ray.posX + app->ray.dirX;
+	new_y = app->ray.posY + app->ray.dirY;
+	if (!is_wall(app, (int)new_x, (int)new_y))
 	{
-		app->ray.posX = newX;
-		app->ray.posY = newY;
+		app->ray.posX = new_x;
+		app->ray.posY = new_y;
 	}
 }
 
-static void move_backward(t_app *app)
+static void	move_backward(t_app *app)
 {
-	double	newX;
-	double	newY;
+	double	new_x;
+	double	new_y;
 
-	newX = app->ray.posX - app->ray.dirX;
-	newY = app->ray.posY - app->ray.dirY;
-		
-	if (!is_wall(app, (int)newX, (int)newY))
+	new_x = app->ray.posX - app->ray.dirX;
+	new_y = app->ray.posY - app->ray.dirY;
+	if (!is_wall(app, (int)new_x, (int)new_y))
 	{
-		app->ray.posX = newX;
-		app->ray.posY = newY;
+		app->ray.posX = new_x;
+		app->ray.posY = new_y;
 	}
 }
 
 static void	strafe_right(t_app *app)
 {
-	double	strafeX;
-	double	strafeY;
-	double	newX;
-	double	newY;
+	double	strafe_x;
+	double	strafe_y;
+	double	new_x;
+	double	new_y;
 
-	strafeX = app->ray.dirY;
-	strafeY = -app->ray.dirX;
-	newX = app->ray.posX + strafeX;
-	newY = app->ray.posY + strafeY;
-	if (!is_wall(app, (int)newX, (int)newY))
+	strafe_x = app->ray.dirY;
+	strafe_y = -app->ray.dirX;
+	new_x = app->ray.posX + strafe_y;
+	new_y = app->ray.posY + strafe_y;
+	if (!is_wall(app, (int)new_x, (int)new_y))
 	{
-		app->ray.posX = newX;
-		app->ray.posY = newY;
+		app->ray.posX = new_x;
+		app->ray.posY = new_y;
 	}
 }
 
 static void	strafe_left(t_app *app)
 {
-	double	strafeX;
-	double	strafeY;
-	double	newX;
-	double	newY;
+	double	strafe_x;
+	double	strafe_y;
+	double	new_x;
+	double	new_y;
 
-	strafeX = -app->ray.dirY;
-	strafeY = app->ray.dirX;
-	newX = app->ray.posX + strafeX;
-	newY = app->ray.posY + strafeY;
-	if (!is_wall(app, (int)newX, (int)newY))
+	strafe_x = -app->ray.dirY;
+	strafe_y = app->ray.dirX;
+	new_x = app->ray.posX + strafe_x;
+	new_y = app->ray.posY + strafe_y;
+	if (!is_wall(app, (int)new_x, (int)new_y))
 	{
-		app->ray.posX = newX;
-		app->ray.posY = newY;
+		app->ray.posX = new_x;
+		app->ray.posY = new_y;
 	}
 }

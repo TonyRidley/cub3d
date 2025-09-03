@@ -53,6 +53,7 @@ typedef struct s_ray
 	double	planeY;
 }	t_ray;
 
+
 typedef struct s_image
 {
 	void	*img_ptr;
@@ -91,6 +92,27 @@ typedef struct s_app
 	int		ceiling_color[3];
 }	t_app;
 
+typedef struct s_raycast_data
+{
+	double	rayDirX;
+	double	rayDirY;
+	int		mapX;
+	int		mapY;
+	double	sideDistX;
+	double	sideDistY;
+	double	deltaDistX;
+	double	deltaDistY;
+	double	perpWallDist;
+	int		stepX;
+	int		stepY;
+	int		side;
+	int		lineHeight;
+	int		drawStart;
+	int		drawEnd;
+	int		texX;
+	t_image	*current_texture;
+}	t_raycast_data;
+
 // Window
 void	ft_mlx_pixel_put(t_image *image, int x, int y, int color);
 int		init_app(t_app *app, char *path_to_map);
@@ -107,12 +129,19 @@ int		get_texture_pixel(t_image *texture, int x, int y);
 // Raycasting
 void	cast_rays(t_app *app);
 double	deg_to_rad(double degrees);
-double	getTicks(void);
+double	get_ticks(void);
 int		is_wall(t_app *app, int x, int y);
+void	init_ray_calculation(t_app *app, int x, t_raycast_data *data);
+void	perform_raycast_calculation(t_app *app, t_raycast_data *data);
+void	render_wall_stripe(t_app *app, t_raycast_data *data, int x);
+void	calculate_step_and_sidedist(t_app *app, t_raycast_data *data);
+void	perform_dda(t_app *app, t_raycast_data *data);
+void	calculate_wall_params(t_raycast_data *data);
+void	calculate_texture_data(t_app *app, t_raycast_data *data);
 
 // Game
 void	handle_movement(t_app *app, int keycode);
-int		find_starting_dir(char *map[], int width, int height, int *x_pos, int *y_pos);
+int		find_starting_dir(t_app *app, int *x_pos, int *y_pos);
 void	rotate_player_right(t_app *app);
 void	rotate_player_left(t_app *app);
 
@@ -135,9 +164,11 @@ char    *skip_whitespace(char *str);
 int		count_elements(char **array);
 int		empty_string(char *str);
 int		validate_config(t_app *app);
+void    free_map(t_app *app);
+int     add_padding_to_line(char *map_line, int map_width);
+int     allocate_memory_for_map(t_app *app);
+int     reopen_and_find_map_start(int fd, char *map_file);
+int validate_map(t_app *app);
+int     parse_map(int fd, t_app *app, char *first_line, char *map_file);
 
-
-
-
-void init_test_map(t_app *app);
 #endif
