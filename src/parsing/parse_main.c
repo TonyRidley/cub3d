@@ -44,7 +44,7 @@ static int	configurations_part(int fd, t_app *app, char **first_line)
 	if (!*first_line)
 	{
 		close(fd);
-		printf("Error\nconfiguration parsing failed or no map found");
+		printf("Error\nconfiguration parsing failed or no map found\n");
 		return (0);
 	}
 	if (!validate_config(app))
@@ -78,9 +78,11 @@ int	parsing(t_app *app, char *map_file)
 	int		fd;
 	char	*first_line;
 
+	if (!ft_strnstr(map_file, ".cub", ft_strlen(map_file)))
+		return (printf("Error\nincorrect file name\n"), 0);
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
-		return (0);
+		return (printf("Error\ncouldn't open file\n"), 0);
 	if (!configurations_part(fd, app, &first_line))
 		return (0);
 	if (!map_part(fd, app, first_line, map_file))
